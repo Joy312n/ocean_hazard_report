@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "tailwindcss";
+/* Import Leaflet's CSS */
+@import 'leaflet/dist/leaflet.css';
+
+/* Ensure map containers have a defined size */
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+}
