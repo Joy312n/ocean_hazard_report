@@ -7,12 +7,60 @@ import { ChatBubbleLeftRightIcon, MapPinIcon } from '@heroicons/react/24/outline
 
 // Mock social media data remains the same
 const mockSocialData = [
-  { id: 1, user: '@asansol_updates', source: 'Twitter', content: 'Huge traffic jam near the Court More due to a broken down truck. Avoid the area!', lat: 23.685, lng: 86.965, timestamp: new Date(Date.now() - 5 * 60000) },
-  { id: 2, user: 'Asansol Citizens Forum', source: 'Facebook', content: 'Reports of a water pipeline burst in the Hutton Road area. Authorities have been notified.', lat: 23.679, lng: 86.97, timestamp: new Date(Date.now() - 15 * 60000) },
-  { id: 3, user: '@wb_power_alerts', source: 'Twitter', content: 'Scheduled power cut in parts of Burnpur from 10 AM to 2 PM today for maintenance work. #Asansol', lat: 23.665, lng: 86.93, timestamp: new Date(Date.now() - 45 * 60000) },
-  { id: 4, user: 'Riya Sen', source: 'Facebook', content: 'Is anyone else experiencing very low water pressure in the Ushagram area? Seems to be a recurring issue.', lat: 23.695, lng: 86.985, timestamp: new Date(Date.now() - 2 * 3600 * 1000) },
-  { id: 5, user: '@local_reporter', source: 'Twitter', content: 'Fallen tree blocking one lane of GT Road near the old bus stand. Traffic moving slowly.', lat: 23.688, lng: 86.978, timestamp: new Date(Date.now() - 3 * 3600 * 1000) },
-  { id: 6, user: 'Asansol Foodies', source: 'Facebook', content: 'The street food festival at Polo Ground is causing major parking issues. Plan accordingly!', lat: 23.67, lng: 86.95, timestamp: new Date(Date.now() - 5 * 3600 * 1000) },
+  {
+    id: 1,
+    user: "@odisha_cyclone_alerts",
+    source: "Twitter",
+    content: "Cyclone warning issued for Puri coast. Fishermen advised not to venture into the sea.",
+    lat: 19.8134, 
+    lng: 85.8315, // Puri, Odisha
+    timestamp: new Date(Date.now() - 20 * 60000), // 20 mins ago
+  },
+  {
+    id: 2,
+    user: "Chennai Coastal Watch",
+    source: "Facebook",
+    content: "Severe coastal flooding reported in Marina Beach after unusually high tides.",
+    lat: 13.0500, 
+    lng: 80.2824, // Marina Beach, Chennai
+    timestamp: new Date(Date.now() - 50 * 60000), // 50 mins ago
+  },
+  {
+    id: 3,
+    user: "@kerala_fishermen_forum",
+    source: "Twitter",
+    content: "Strong winds disrupting fishing near Alappuzha coast. Multiple boats reported damage.",
+    lat: 9.4981, 
+    lng: 76.3388, // Alappuzha, Kerala
+    timestamp: new Date(Date.now() - 2 * 3600 * 1000), // 2 hours ago
+  },
+  {
+    id: 4,
+    user: "Goa Beach Safety",
+    source: "Facebook",
+    content: "Oil spill spotted off Baga Beach, causing water contamination concerns.",
+    lat: 15.5527, 
+    lng: 73.7517, // Baga Beach, Goa
+    timestamp: new Date(Date.now() - 3 * 3600 * 1000), // 3 hours ago
+  },
+  {
+    id: 5,
+    user: "@andaman_alerts",
+    source: "Twitter",
+    content: "Earthquake tremors felt near Port Blair. Tsunami advisory under observation.",
+    lat: 11.6234, 
+    lng: 92.7265, // Port Blair, Andaman & Nicobar
+    timestamp: new Date(Date.now() - 6 * 3600 * 1000), // 6 hours ago
+  },
+  {
+    id: 6,
+    user: "Mumbai Coastal Watch",
+    source: "Facebook",
+    content: "Coastal erosion reported along Versova Beach. Locals urged to avoid affected areas.",
+    lat: 19.1340, 
+    lng: 72.8122, // Versova Beach, Mumbai
+    timestamp: new Date(Date.now() - 10 * 3600 * 1000), // 10 hours ago
+  },
 ];
 
 const formatTimeAgo = (date) => {
