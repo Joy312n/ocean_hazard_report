@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const token = localStorage.getItem('token');
@@ -8,7 +8,6 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
-    // Navigate to login and reload the page
     window.location.href = '/login';
   };
 
@@ -23,6 +22,7 @@ const Navbar = () => {
             <NavLink to="/" className="text-white hover:text-blue-200">Home</NavLink>
             <NavLink to="/submit-report" className="text-white hover:text-blue-200">Submit Report</NavLink>
             <NavLink to="/map-view" className="text-white hover:text-blue-200">Map View</NavLink>
+            <NavLink to="/social-feed" className="text-white hover:text-blue-200">Social Feed</NavLink> {/* <-- Add new link */}
             {token ? (
               <div className="flex items-center space-x-4">
                 <span className="text-white font-medium">Hi, {userName || 'User'}</span>
