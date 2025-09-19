@@ -7,22 +7,22 @@ const Home = () => {
     <div className="bg-gray-50">
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-20 px-4 text-center">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
           Keep Your Community Safe
         </h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
           Report hazards, view community alerts, and help make your neighborhood safer for everyone.
         </p>
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/submit-report"
-            className="flex items-center gap-2 bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300 text-lg shadow-lg"
+            className="flex items-center justify-center gap-2 bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300 text-lg shadow-lg"
           >
             <DocumentTextIcon className="h-6 w-6" /> Report a Hazard
           </Link>
           <Link
             to="/map-view"
-            className="flex items-center gap-2 border border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-blue-600 transition duration-300 text-lg shadow-lg"
+            className="flex items-center justify-center gap-2 border border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-blue-600 transition duration-300 text-lg shadow-lg"
           >
             <MapPinIcon className="h-6 w-6" /> View Map
           </Link>

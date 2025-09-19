@@ -1,17 +1,25 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 @import "tailwindcss";
 /* Import Leaflet's CSS */
 @import 'leaflet/dist/leaflet.css';
 
-/* Ensure map containers have a defined size */
+
 .leaflet-container {
 height: 100%;
 width: 100%;
 }
-/* Add this to the end of src/index.css */
-
+html {
+  overflow-y: scroll;
+}
+html {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
 .hotspot-marker {
 background-color: rgba(239, 68, 68, 0.5); /* Semi-transparent red */
 border-radius: 50%;

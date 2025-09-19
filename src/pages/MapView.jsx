@@ -3,15 +3,13 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import api from "../services/api";
 import { MapPinIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
-
 import "leaflet/dist/leaflet.css";
 
-// Import marker images
+// Marker fix
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-// Fix Leaflet default marker icon paths
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -23,6 +21,7 @@ const MapView = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState("map"); // 👈 for mobile toggle
   const defaultPosition = [23.6823, 86.9536]; // Asansol
 
   const fetchReports = async () => {
@@ -43,10 +42,9 @@ const MapView = () => {
     fetchReports();
   }, []);
 
-  // Priority badge colors
+  // Badge helpers
   const getPriorityStyle = (report) => {
-    const priority = report.priority || "moderate";
-    switch (priority.toLowerCase()) {
+    switch ((report.priority || "moderate").toLowerCase()) {
       case "urgent":
         return "bg-red-500";
       case "moderate":
@@ -57,11 +55,8 @@ const MapView = () => {
         return "bg-gray-400";
     }
   };
-
-  // Status badge colors
   const getStatusStyle = (report) => {
-    const status = report.status || "verified";
-    switch (status.toLowerCase()) {
+    switch ((report.status || "verified").toLowerCase()) {
       case "verified":
         return "bg-blue-100 text-blue-800";
       case "resolved":
@@ -78,9 +73,9 @@ const MapView = () => {
       {/* Main container */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="bg-white p-6 shadow-sm flex justify-between items-center border-b border-gray-200">
+        <div className="bg-white p-4 shadow-sm flex justify-between items-center border-b border-gray-200">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
               <MapPinIcon className="h-6 w-6 text-blue-600 mr-2" />
               Community Hazard Map
             </h1>
@@ -91,7 +86,7 @@ const MapView = () => {
           <button
             onClick={fetchReports}
             disabled={loading}
-            className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md shadow-sm hover:bg-gray-200 transition-colors disabled:opacity-50"
+            className="flex items-center px-3 py-2 bg-gray-100 text-gray-700 rounded-md shadow-sm hover:bg-gray-200 transition-colors disabled:opacity-50"
           >
             <ArrowPathIcon
               className={`h-5 w-5 mr-2 ${loading ? "animate-spin" : ""}`}
@@ -100,32 +95,40 @@ const MapView = () => {
           </button>
         </div>
 
-        {/* Map + Sidebar */}
-        <div className="flex flex-1 overflow-hidden">
-          {/* ========================= MAP SECTION ========================= */}
-          <div className="flex-1 relative h-full">
+        {/* ==================== CONTENT ==================== */}
+        <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+          {/* MOBILE TABS */}
+          <div className="sm:hidden flex justify-around bg-white border-b">
+            <button
+              onClick={() => setActiveTab("map")}
+              className={`w-1/2 py-2 text-sm font-medium ${
+                activeTab === "map"
+                  ? "border-b-2 border-blue-600 text-blue-600"
+                  : "text-gray-600"
+              }`}
+            >
+              Map
+            </button>
+            <button
+              onClick={() => setActiveTab("reports")}
+              className={`w-1/2 py-2 text-sm font-medium ${
+                activeTab === "reports"
+                  ? "border-b-2 border-blue-600 text-blue-600"
+                  : "text-gray-600"
+              }`}
+            >
+              Reports
+            </button>
+          </div>
+
+          {/* MAP */}
+          <div
+            className={`flex-1 relative h-1/2 sm:h-full ${
+              activeTab === "map" ? "block" : "hidden sm:block"
+            }`}
+          >
             {loading && (
               <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
-                <svg
-                  className="animate-spin -ml-1 mr-3 h-8 w-8 text-blue-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
                 <span className="text-lg text-gray-700">Loading map data...</span>
               </div>
             )}
@@ -194,8 +197,12 @@ const MapView = () => {
             </MapContainer>
           </div>
 
-          {/* ========================= SIDEBAR ========================= */}
-          <div className="w-80 bg-white border-l border-gray-200 overflow-y-auto p-6 space-y-6">
+          {/* REPORTS SIDEBAR */}
+          <div
+            className={`sm:w-80 bg-white border-l border-gray-200 overflow-y-auto p-4 sm:p-6 space-y-6 ${
+              activeTab === "reports" ? "block" : "hidden sm:block"
+            }`}
+          >
             <div className="bg-blue-50 p-4 rounded-lg">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Recent Reports
