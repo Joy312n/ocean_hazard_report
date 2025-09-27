@@ -23,7 +23,8 @@ export default function Login() {
 
       // 3. Navigate and force a reload to ensure the whole app recognizes the login
       // This is the simplest way to make sure the Navbar updates.
-      window.location.href = '/submit-report';
+      // window.location.href = '/submit-report';
+      window.location.href = '/';
 
     } catch (err) {
       alert("Error: " + (err.response?.data?.message || "Invalid credentials."));
@@ -51,7 +52,7 @@ export default function Login() {
             required
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
-          <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold">
+          <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 font-semibold hover:cursor-pointer">
             Login
           </button>
         </form>
